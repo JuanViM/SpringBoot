@@ -1,0 +1,13 @@
+package com.bolsadeideas.springboot.di.app.models.service;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class MiServicio {
+	
+	public String operacion() {
+		
+		return "ejecutando algun servicio";
+	}
+
+}
