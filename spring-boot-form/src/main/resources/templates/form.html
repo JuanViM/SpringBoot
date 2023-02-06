@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${Titulo}"></title>
+</head>
+<body>
+	<h3 th:text="${Titulo}"></h3>
+	<form th:action="@{/form}" th:object="${usuario}" method="post">
+			<div>
+			<label for="identificador">identificador</label>
+			<div>
+				<input type="text" id="identificador" th:field="*{identificador}">
+			</div>
+			<div th:if="${#fields.hasErrors('identificador')}" th:errors="*{identificador}"></div>
+		</div>
+		<div>
+			<label for="nombre">Nombre</label>
+			<div>
+				<input type="text" id="nombre" th:field="*{nombre}">
+			</div>
+			<div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+		</div>
+		<div>
+			<label for="apellidos">Apellidos</label>
+			<div>
+				<input type="text" id="apellidos" th:field="*{apellidos}">
+			</div>
+			<div th:if="${#fields.hasErrors('apellidos')}"
+				th:errors="*{apellidos}"></div>
+		</div>
+		<div>
+			<label for="email">email</label>
+			<div>
+				<input type="text" id="email" th:field="*{email}">
+			</div>
+			<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+		</div>
+		<div>
+			<label for="pass">pass</label>
+			<div>
+				<input type="text" id="pass" th:field="*{pass}">
+			</div>
+			<div th:if="${#fields.hasErrors('pass')}" th:errors="*{pass}"></div>
+		</div>
+		<div>
+			<label for="username">username</label>
+			<div>
+				<input type="text" id="username" th:field="*{username}">
+			</div>
+			<div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+		</div>
+		<div>
+			<div>
+				<input type="submit" value="Enviar">
+			</div>
+		</div>
+	</form>
+
+</body>
+</html>
