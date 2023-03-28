@@ -106,11 +106,6 @@ public class Usuario {
 		this.email = email;
 	}
 
-	@Override
-	public String toString() {
-		return "Usuario [nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email + "]";
-	}
-
 	public String getIdentificador() {
 		return identificador;
 	}
@@ -165,5 +160,13 @@ public class Usuario {
 
 	public void setGenero(String genero) {
 		this.genero = genero;
+	}
+
+	@Override
+	public String toString() {
+		return "Usuario [identificador=" + identificador + ", nombre=" + nombre + ", apellidos=" + apellidos
+				+ ", email=" + email + ", username=" + username + ", pass=" + pass + ", cuenta=" + cuenta
+				+ ", fechaNacimiento=" + fechaNacimiento + ", pais=" + pais + ", roles=" + roles + ", habilitar="
+				+ habilitar + ", genero=" + genero + ", valorSecreto=" + valorSecreto + "]";
 	}
 }

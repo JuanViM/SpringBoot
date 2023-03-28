@@ -5,6 +5,8 @@
 <title th:text="${Titulo}"></title>
 </head>
 <body>
+<section th:replace="componentes/tiempo :: interceptor"></section>
+
 	<h3 th:text="${Titulo}"></h3>
 	<form th:action="@{/form}" th:object="${usuario}" method="post">
 		
@@ -40,7 +42,8 @@
 		<div>
 			<label>Roles</label>
 			<div th:each="role: ${listaRoles}">
-				<input type="checkbox" th:field="*{roles}" th:value="${role.id}">
+				<input type="checkbox" th:field="*{roles}" th:value="${role.id}"
+				th:checked="${#lists.contains(usuario.roles, role)}">
 				<label th:for="${#ids.prev('roles')}" th:text="${role.nombre}"></label>
 			</div>
 			<div th:if="${#fields.hasErrors('roles')}"
@@ -113,7 +116,7 @@
 				<input type="submit" value="Enviar">
 			</div>
 		</div>
-		<input type="hidden" th:field="{valorSecreto}">
+		<input type="hidden" th:field="${usuario.valorSecreto}">
 	</form>
 
 </body>

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -133,6 +134,8 @@ public class FormController {
 		usuario.setIdentificador("12.345.123-J");
 		usuario.setHabilitar(true);
 		usuario.setValorSecreto("Algun valor secreto *****");
+		usuario.setRoles(Arrays.asList(new Role(2,"Usuario","ROLE_USER")));
+		usuario.setPais(new Pais(1, "ES", "España"));// ponemos españa como pais por defecto
 		model.addAttribute("Titulo", "Formulario del usuario");
 		model.addAttribute("usuario", usuario);
 		return "form";
@@ -141,12 +144,13 @@ public class FormController {
 
 	@PostMapping("/form") // este metodo es el que obtiene los datos del formulario y se mostraran en
 							// resultado
-	public String procesar(@Valid Usuario usuario, BindingResult result, Model model, SessionStatus status) {
+	public String procesar(@Valid Usuario usuario, BindingResult result, Model model) {
 
 		// validador.validate(usuario, result);
-		model.addAttribute("Titulo", "Resultado del Formulario");
+		
 
 		if (result.hasErrors()) {
+			model.addAttribute("Titulo", "Resultado del Formulario");
 //			Map<String,String> errores = new HashMap<>();	
 //			
 //			result.getFieldErrors().forEach(err ->{
@@ -157,10 +161,21 @@ public class FormController {
 
 		}
 
-		model.addAttribute("usuario", usuario);
-		status.setComplete();
-		return "resultado";
+		
+		return "redirect:/ver";
 
 	}
+	
+	@GetMapping("/ver")
+	public String ver(@SessionAttribute(name = "usuario",required = false) Usuario usuario,Model model, SessionStatus status) {
+		if(usuario == null ) {
+			return "redirect:/form";
+		}
+		
+		model.addAttribute("Titulo", "Resultado del Formulario");
+		status.setComplete();
+		return "resultado";
+	}
+	
 
 }
